@@ -3,6 +3,7 @@ import { UserProfile } from "@/components/auth/user-profile";
 import { createClient } from "@/utils/supabase/server";
 import { InfoIcon } from "lucide-react";
 import { redirect } from "next/navigation";
+import NotesManager from "@/components/notes/NotesManager";
 
 export default async function ProtectedPage() {
   const supabase = await createClient();
@@ -41,6 +42,11 @@ export default async function ProtectedPage() {
         </details>
       </div>
       <div>
+        <h2 className="font-bold text-2xl mb-4">Your Notes</h2>
+        <div className="mb-8">
+          <NotesManager />
+        </div>
+
         <h2 className="font-bold text-2xl mb-4">Next steps</h2>
         <FetchDataSteps />
       </div>

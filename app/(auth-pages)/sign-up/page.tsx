@@ -1,4 +1,5 @@
 import { signUpAction } from "@/app/actions";
+import { GoogleButton } from "@/components/auth/google-button";
 import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
@@ -43,6 +44,19 @@ export default async function Signup(props: {
             Sign up
           </SubmitButton>
           <FormMessage message={searchParams} />
+
+          <div className="relative my-4">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-muted-foreground/30"></div>
+            </div>
+            <div className="relative flex justify-center text-xs">
+              <span className="bg-background px-2 text-muted-foreground">
+                or continue with
+              </span>
+            </div>
+          </div>
+
+          <GoogleButton mode="sign-up" />
         </div>
       </form>
       <SmtpMessage />

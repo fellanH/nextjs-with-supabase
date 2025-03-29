@@ -1,4 +1,5 @@
 import FetchDataSteps from "@/components/tutorial/fetch-data-steps";
+import { UserProfile } from "@/components/auth/user-profile";
 import { createClient } from "@/utils/supabase/server";
 import { InfoIcon } from "lucide-react";
 import { redirect } from "next/navigation";
@@ -23,11 +24,21 @@ export default async function ProtectedPage() {
           user
         </div>
       </div>
-      <div className="flex flex-col gap-2 items-start">
+      <div className="flex flex-col gap-8 items-start">
         <h2 className="font-bold text-2xl mb-4">Your user details</h2>
-        <pre className="text-xs font-mono p-3 rounded border max-h-32 overflow-auto">
-          {JSON.stringify(user, null, 2)}
-        </pre>
+
+        {/* Client-side user profile with Google data support */}
+        <UserProfile />
+
+        {/* Server-side raw user data for debugging */}
+        <details className="mt-4">
+          <summary className="cursor-pointer text-sm text-muted-foreground">
+            Raw user data
+          </summary>
+          <pre className="text-xs font-mono p-3 mt-2 rounded border max-h-32 overflow-auto">
+            {JSON.stringify(user, null, 2)}
+          </pre>
+        </details>
       </div>
       <div>
         <h2 className="font-bold text-2xl mb-4">Next steps</h2>

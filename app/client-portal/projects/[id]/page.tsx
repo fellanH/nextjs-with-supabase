@@ -6,10 +6,10 @@ import LinkCard from "@/components/client-portal/LinkCard";
 export default async function ProjectDetail({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const supabase = await createClient();
-  const { id } = params;
+  const { id } = await params;
 
   // Check authentication
   const {

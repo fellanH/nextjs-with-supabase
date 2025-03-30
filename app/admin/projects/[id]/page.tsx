@@ -8,13 +8,14 @@ import { isAdmin } from "@/utils/auth";
 export default async function AdminProjectPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   // Check if user is admin
   if (!(await isAdmin())) return redirect("/sign-in");
 
+  const { id } = await params;
+
   const supabase = await createClient();
-  const { id } = params;
 
   // Get project details
   const { data: project } = await supabase

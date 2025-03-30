@@ -30,9 +30,9 @@ export default function LinkCard({ link }: { link: ProjectLink }) {
 
   return (
     <a href={link.url} target="_blank" rel="noopener noreferrer">
-      <Card className="h-full hover:border-primary/50 transition-colors cursor-pointer">
+      <Card className="h-full hover:border-primary/50 transition-colors cursor-pointer pb-4">
         <CardHeader className="pb-2">
-          <div className="flex justify-between items-start">
+          <div className="flex justify-between items-start gap-6">
             <CardTitle className="text-base flex items-center gap-2">
               {link.title}
               <ExternalLink size={14} />

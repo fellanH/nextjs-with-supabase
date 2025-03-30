@@ -22,14 +22,24 @@ export default async function Signup(props: {
   return (
     <>
       <form className="flex flex-col min-w-64 max-w-64 mx-auto">
-        <h1 className="text-2xl font-medium">Sign up</h1>
-        <p className="text-sm text text-foreground">
-          Already have an account?{" "}
-          <Link className="text-primary font-medium underline" href="/sign-in">
-            Sign in
-          </Link>
+        <h1 className="text-2xl font-medium pb-4">Sign up</h1>
+        <p className="text-sm text-foreground">
+          You can use your google account.
         </p>
+
         <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
+          <GoogleButton mode="sign-up" />
+
+          <div className="relative my-4">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-muted-foreground/30"></div>
+            </div>
+            <div className="relative flex justify-center text-xs">
+              <span className="bg-background px-2 text-muted-foreground">
+                or continue with
+              </span>
+            </div>
+          </div>
           <Label htmlFor="email">Email</Label>
           <Input name="email" placeholder="you@example.com" required />
           <Label htmlFor="password">Password</Label>
@@ -44,20 +54,13 @@ export default async function Signup(props: {
             Sign up
           </SubmitButton>
           <FormMessage message={searchParams} />
-
-          <div className="relative my-4">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-muted-foreground/30"></div>
-            </div>
-            <div className="relative flex justify-center text-xs">
-              <span className="bg-background px-2 text-muted-foreground">
-                or continue with
-              </span>
-            </div>
-          </div>
-
-          <GoogleButton mode="sign-up" />
         </div>
+        <p className="text-sm text text-foreground mt-4">
+          Already have an account?{" "}
+          <Link className="text-primary font-medium underline" href="/sign-in">
+            Sign in
+          </Link>
+        </p>
       </form>
       <SmtpMessage />
     </>

@@ -45,7 +45,7 @@ export default async function ClientDashboard() {
   return (
     <div className="flex-1 w-full flex flex-col gap-8 p-4 md:p-8">
       <div>
-        <h1 className="text-2xl font-bold">Welcome, {client.name}</h1>
+        <h1 className="text-2xl font-bold pb-1">Welcome, {client.name}</h1>
         <p className="text-muted-foreground">Here are your current projects</p>
       </div>
 

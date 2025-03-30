@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { createClient } from "@/utils/supabase/server";
+import { isAdmin } from "@/utils/auth";
 
 export default async function AuthButton() {
   const supabase = await createClient();
@@ -12,6 +13,9 @@ export default async function AuthButton() {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // Check if user is admin
+  const isUserAdmin = user ? await isAdmin() : false;
+
   if (!hasEnvVars) {
     return (
       <>
@@ -19,8 +23,7 @@ export default async function AuthButton() {
           <div>
             <Badge
               variant={"default"}
-              className="font-normal pointer-events-none"
-            >
+              className="font-normal pointer-events-none">
               Please update .env.local file with anon key and url
             </Badge>
           </div>
@@ -30,8 +33,7 @@ export default async function AuthButton() {
               size="sm"
               variant={"outline"}
               disabled
-              className="opacity-75 cursor-none pointer-events-none"
-            >
+              className="opacity-75 cursor-none pointer-events-none">
               <Link href="/sign-in">Sign in</Link>
             </Button>
             <Button
@@ -39,8 +41,7 @@ export default async function AuthButton() {
               size="sm"
               variant={"default"}
               disabled
-              className="opacity-75 cursor-none pointer-events-none"
-            >
+              className="opacity-75 cursor-none pointer-events-none">
               <Link href="/sign-up">Sign up</Link>
             </Button>
           </div>
@@ -51,6 +52,14 @@ export default async function AuthButton() {
   return user ? (
     <div className="flex items-center gap-4">
       Hey, {user.email}!
+      {isUserAdmin && (
+        <Button asChild size="sm" variant={"secondary"}>
+          <Link href="/admin">Admin Portal</Link>
+        </Button>
+      )}
+      <Button asChild size="sm" variant={"secondary"}>
+        <Link href="/client-portal">Client Portal</Link>
+      </Button>
       <form action={signOutAction}>
         <Button type="submit" variant={"outline"}>
           Sign out

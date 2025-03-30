@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import { InfoIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 import NotesManager from "@/components/notes/NotesManager";
+import TrelloBoardWrapper from "@/components/trello/TrelloBoardWrapper";
 
 export default async function ProtectedPage() {
   const supabase = await createClient();
@@ -41,6 +42,13 @@ export default async function ProtectedPage() {
           </pre>
         </details>
       </div>
+
+      {/* Trello Board with client-side rendering */}
+      <div className="w-full">
+        <h2 className="font-bold text-2xl mb-4">Trello Board</h2>
+        <TrelloBoardWrapper url="https://trello.com/b/TAeHfdYF/stormfors-template" />
+      </div>
+
       <div>
         <h2 className="font-bold text-2xl mb-4">Your Notes</h2>
         <div className="mb-8">

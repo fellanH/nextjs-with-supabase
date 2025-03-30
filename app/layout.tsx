@@ -1,4 +1,3 @@
-import DeployButton from "@/components/deploy-button";
 import { EnvVarWarning } from "@/components/env-var-warning";
 import HeaderAuth from "@/components/header-auth";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -45,7 +44,6 @@ export default function RootLayout({
                     <div className="flex items-center gap-2"></div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <p>Light/Dark Mode</p>
                     <ThemeSwitcher />
                     {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
                   </div>

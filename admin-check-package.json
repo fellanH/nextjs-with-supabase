@@ -1,0 +1,14 @@
+{
+  "name": "admin-check",
+  "version": "1.0.0",
+  "description": "Check and setup admin tables for Supabase",
+  "type": "module",
+  "main": "check-admin-table.js",
+  "scripts": {
+    "check": "node check-admin-table.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.8",
+    "dotenv": "^16.4.5"
+  }
+}

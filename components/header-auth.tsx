@@ -51,7 +51,6 @@ export default async function AuthButton() {
   }
   return user ? (
     <div className="flex items-center gap-4">
-      Hey, {user.email}!
       {isUserAdmin && (
         <Button asChild size="sm" variant={"secondary"}>
           <Link href="/admin">Admin Portal</Link>

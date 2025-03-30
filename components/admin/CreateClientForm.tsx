@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/utils/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
+import { createClientWithUser } from "@/app/actions";
 
 export default function CreateClientForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,41 +29,13 @@ export default function CreateClientForm() {
     setIsSubmitting(true);
 
     try {
-      const supabase = createClient();
-
-      // First check if the user exists by email (using auth.getUser() would require being signed in as that user)
-      const { data: existingUsers, error: userError } = await supabase
-        .from("auth.users")
-        .select("id")
-        .eq("email", formData.email);
-
-      let userId;
-
-      if (!existingUsers || existingUsers.length === 0) {
-        // Create a new user (in a production app, you would send an invite)
-        // Note: This requires admin privileges on the API key
-        const { data: newUser, error: createError } =
-          await supabase.auth.admin.createUser({
-            email: formData.email,
-            email_confirm: true,
-            user_metadata: { full_name: formData.name },
-          });
-
-        if (createError) throw createError;
-        userId = newUser.user.id;
-      } else {
-        userId = existingUsers[0].id;
-      }
-
-      // Create client record
-      const { error: clientError } = await supabase.from("clients").insert({
+      // Use the server action instead of direct Supabase client calls
+      await createClientWithUser({
         name: formData.name,
-        user_id: userId,
-        phone: formData.phone || null,
-        company: formData.company || null,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
       });
-
-      if (clientError) throw clientError;
 
       // Redirect back to clients list
       router.push("/admin/clients");

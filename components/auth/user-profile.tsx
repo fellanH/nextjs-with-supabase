@@ -69,12 +69,6 @@ export function UserProfile() {
           )}
         </div>
       </div>
-
-      <form action={signOutAction}>
-        <Button variant="outline" className="w-full" type="submit">
-          Sign out
-        </Button>
-      </form>
     </div>
   );
 }
